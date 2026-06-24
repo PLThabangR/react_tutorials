@@ -1,0 +1,31 @@
+import React, { useEffect, useState } from 'react'
+
+const FormsExample = () => {
+    const [name,setName] = useState( ()=>{
+        //Get the saved value from local storgae
+    const    savedValue = localStorage.getItem("name");
+
+        return savedValue? JSON.parse(savedValue) : "";
+    })
+
+    const saveName = (e) =>{
+       console.log(name) 
+    }
+
+    useEffect(() => {
+        //set name in the local storage as the application load
+       localStorage.setItem("name", JSON.stringify(name)); 
+       //dependancy array to run this code only when name changes
+    },[name])
+    const handleChange = (e) => setName(e.target.value);
+    //clear local storage
+    const clearStorage = () => setName("");
+  return (
+    <div  style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"10px"}}>
+        <input type="text" value={name} onChange={handleChange} />
+        <button onClick={clearStorage}>clear storage</button>    
+    </div>
+  )
+}
+
+export default FormsExample
