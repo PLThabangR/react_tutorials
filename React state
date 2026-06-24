@@ -1,0 +1,86 @@
+import React, { useState } from 'react'
+import { BiBarChart } from "react-icons/bi";
+import { WiDayRainWind } from "react-icons/wi";
+
+const clicked =()=>{
+    console.log("clicked")
+    let rNum = Math.floor(Math.random() * 100);
+    console.log(rNum)
+}
+function Styling() {
+
+ const [fruits, setfruits] = useState(["Apple","Banana","Mango","Orange"]);
+ const [time, settime] = useState(new Date().toLocaleTimeString())
+
+ const [movies,setMovies] = useState([{id:1,name:"Avatar"},{id:2,name:"Pokemoon"},{id:3,name:"Spiderman 2"},{id:4,name:"Avengers 3"}])
+
+// Add fruit
+const addFruit = () => {
+    setfruits([...fruits, "Watermelon","Pineapple"]);
+  };
+
+  const removeFruit = () => {
+    //Ass long as the fruit is not watermelon filter it out
+    setfruits(fruits.filter((fruit) => fruit !== "Watermelon"));
+  };
+
+  const updateFruit = () => {
+    //Update fruit
+    setfruits(fruits.map((fruit) => fruit === "Apple" ? "Red apple" : fruit));
+  };
+
+  const addMovie = () => {
+    //Add movie
+    setMovies([...movies, {id:5,name:"Avengers 4"}]);
+  };
+
+  //Remove movie
+  const removeMovie = () => {
+    //Remove movie
+    setMovies(movies.filter((movie) => movie.id !== 4));
+  };
+  //
+  const updateMovie = () => {
+    //Update movie
+    setMovies(movies.map((movie) => movie.id === 3 ? {...movie,name:"Avengers 4"} : movie));
+  }
+
+    return (
+        <div>
+        
+        <h1>Fruits list</h1>
+        {
+            fruits.map((fruits, index) => (
+                <div key={index}>
+                    <p>{fruits}</p>
+                </div>
+            ))
+        }
+      <div style={{display:"flex", gap:"10px"}}>
+        <button onClick={()=> addFruit()}>Add Fruit</button>
+        <button onClick={()=> removeFruit()}>Remove Fruit</button>
+        <button onClick={()=> updateFruit()}>Update Fruit</button>
+
+      </div>
+           <h1>Movies list</h1>
+        {
+            movies.map((movie, index) => (
+                <div key={movie.id}>
+                    <p>{movie.name}</p>
+                </div>
+            ))
+        }
+
+
+           <div style={{display:"flex", gap:"10px"}}>
+        <button onClick={()=> addMovie()}>Add Movie</button>
+        <button onClick={()=> removeMovie()}>Remove Movie</button>
+        <button onClick={()=> updateMovie()}>Update Movie</button>
+
+      </div>
+           
+        </div>
+    )
+}
+
+export default Styling
